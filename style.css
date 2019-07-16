@@ -1,0 +1,22 @@
+body {
+    background-image: url("./images/white_carbonfiber/white_carbonfiber.png");
+}
+.jumbotron {
+    text-align: center;
+    background-color: blue;
+    color: aliceblue;
+}
+.card {
+    margin-bottom: 50px;
+}
+.form-group {
+    padding: 10px;
+}
+button {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.train {
+
+    margin-left: 75px;
+}
