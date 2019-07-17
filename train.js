@@ -26,11 +26,18 @@ $(".btn").on("click", function(event){
         destination: $("#destinationInput").val().trim(),
         time: $("#timeInput").val().trim(),
         frequency: $("#frequencyInput").val().trim(),
+
+       
     };
     db.ref().push(train);
     //console.log(train.name);
+    $("#nameInput").val("");
+    $("#destinationInput").val("");
+    $("#timeInput").val("");
+    $("#frequencyInput").val("");
+    
 });
-db.ref('/').on("child_added", function(childSnap) {
+db.ref().on("child_added", function(childSnap) {
 
     //console.log(childSnap.val().name)
     
@@ -41,18 +48,19 @@ db.ref('/').on("child_added", function(childSnap) {
     var timeConverted = moment(firstTrain, "HH:mm");
     //console.log(timeConverted);
     var timeDifference = Math.abs(moment().diff(moment(timeConverted), "minutes"));
+    //console.log(timeDifference)
     var remainder = timeDifference % trainFrequency;
-    console.log(remainder);
+    //console.log(remainder);
     var minsAway = trainFrequency - remainder;
     var arrival = moment().add(minsAway, "minutes");
-    console.log(arrival);
-
+    //console.log(arrival);
+    
     
     var newRow = $("#trains").append("<tr>");
     $(newRow).append("<td scope='col'>" + childSnap.val().name + "</td>");
     $(newRow).append("<td scope='col'>" + childSnap.val().destination + "</td>");
     $(newRow).append("<td scope='col'>" + childSnap.val().frequency + "</td>");
-    $(newRow).append("<td scope='col'>" + arrival);
+    $(newRow).append("<td scope='col'>" + moment(arrival).format("hh:mm, a"));
     $(newRow).append("<td scope='col'>" + minsAway);
     $("#trains").append(newRow);
 
